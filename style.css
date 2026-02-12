@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Press+Start+2P&family=Bebas+Neue&family=Luckiest+Guy&family=Montserrat:wght@400;700&display=swap');
+
+ :root {
+   
+    --font-logo: 'Titan One', cursive;
+    --font-mc: 'Press Start 2P', cursive;
+    --font-fn: 'Bebas Neue', sans-serif;
+    --font-rb: 'Luckiest Guy', cursive;
+    --font-main: 'Montserrat', sans-serif;
+
+   
+    --mc-pink: #d63384;
+    --rb-purple: #7b2cbf;
+    --bg-dark: #0a0a0a;
+}
+
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: 
+    border-box; }
+body { font-family: 
+     var(--font-main);
+     color: #333;
+     scroll-behavior:
+     smooth; }
+
+
+.sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 255px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+.side-link img {
+    width: 175px;
+    height: 175px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    display: block;
+}
+
+.side-link img {
+    width: 60px;  /* Было 45px */
+    height: 60px; /* Было 45px */
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* ГЛАВНАЯ СТРАНИЦА (HERO) */
+.main-hero {
+    height: 100vh; /* Теперь картинка занимает 100% высоты экрана */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    font-family: var(--font-logo);
+    font-size: 110px;
+    color: white;
+    text-shadow: 5px 5px var(--mc-pink);
+    letter-spacing: -2px;
+}
+
+/* СЕКЦИИ И БАННЕРЫ */
+.game-section { padding-bottom: 80px; }
+.game-banner {
+    height: 600px; /* Баннеры игр станут намного выше и крупнее */
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-items: center;
+    margin-bottom: 40px;
+
+
+}
+
+.container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 20px; }
+.split { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 40px; }
+
+
+.mc-font { 
+    font-family: var(--font-mc);
+    font-size: 95px; 
+    color: white;
+    background: rgba(255, 255, 255, 0.575);
+    padding: 10px 30px; }
+.fn-font { 
+    font-family: var(--font-fn); 
+    font-size: 120px;
+    color: white; 
+    text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.rb-font { 
+    font-family: var(--font-rb);
+     font-size: 110px;
+     color: white; }
+
+
+.mc-title { 
+    color: var(--mc-pink);
+    font-size: 26px;
+    margin-bottom: 15px; 
+    font-weight: 700; }
+.text-content { flex: 1; }
+p { 
+    line-height: 1.6;
+    font-size: 15px;
+    color: #444; }
+
+
+.char-image img {
+     width: 180px;
+     filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1)); }
+.skins-footer { display: flex;
+     justify-content: space-between;
+      align-items: flex-end;
+       margin-top: 50px; }
+.skins-grid { display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 12px;
+     width: 60%; }
+.skin-box { 
+    height: 110px;
+     background: #f0f0f0;
+     border: 1px solid #ddd;
+     border-radius: 8px; }
+.skins-label { font-family: var(--font-mc);
+     font-size: 2px;
+      color: var(--mc-pink);
+       width: 30%;
+        text-align: right; }
+
+
+.fn-section { 
+    background: var(--bg-dark);
+     color: white; }
+.fn-section p { color: #aaa; }
+.dark-card h3 { 
+    font-size: 18px; 
+    font-weight: 800; 
+    margin-bottom: 15px; }
+
+.rb-card h3 { 
+    color: var(--rb-purple); 
+    font-size: 22px; 
+    font-weight: 800;
+     margin-bottom: 15px; }
+.rb-card {
+     image-rendering: pixelated;
+}
+    
+.mc-section {
+    margin-top: 200px; /* Это создаст пустое пространство (дырку) в 200 пикселей */
+}
+.skins-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.skins-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Чтобы скины переносились на новую строку, если их много */
+    gap: 30px; /* Расстояние между карточками */
+}
+
+.skin-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.skin-card:hover {
+    transform: translateY(-10px); /* Эффект прыжка при наведении */
+}
+
+.skin-card img {
+    width: 150px; /* Ширина скина */
+    height: auto;
+    image-rendering: pixelated; /* ВАЖНО: сохраняет четкость пикселей (не размывает скин) */
+}
