@@ -27,41 +27,41 @@ links.forEach(function (element) {
 })
 
 
-let condition = true;
+// let condition = true;
 
-function forward() {
-    anime({
-        targets: '.menu-small',
-        translateX: ['-100%', '0'],
-        easing: 'easeInOutQuad',
-        direction: 'alternate',
-        duration: 1000,
-        loop: false
-    });
+// function forward() {
+//     anime({
+//         targets: '.menu-small',
+//         translateX: ['-100%', '0'],
+//         easing: 'easeInOutQuad',
+//         direction: 'alternate',
+//         duration: 1000,
+//         loop: false
+//     });
 
-    condition = false
-}
+//     condition = false
+// }
 
-function backward() {
-    anime({
-        targets: '.menu-small',
-        translateX: ['0', '-100%'],
-        easing: 'easeInOutQuad',
-        direction: 'alternate',
-        duration: 1000,
-        loop: false
-    });
+// function backward() {
+//     anime({
+//         targets: '.menu-small',
+//         translateX: ['0', '-100%'],
+//         easing: 'easeInOutQuad',
+//         direction: 'alternate',
+//         duration: 1000,
+//         loop: false
+//     });
 
-    condition = true
-}
+//     condition = true
+// }
 
-$('.menu_small_icon').click(function () {
-    if (condition) {
-        forward();
-    } else {
-        backward();
-    }
-});
+// $('.menu_small_icon').click(function () {
+//     if (condition) {
+//         forward();
+//     } else {
+//         backward();
+//     }
+// });
 let fnHP = 100;
 let fnMats = 30;
 let gameActive = false;
@@ -198,3 +198,62 @@ function playEmote() {
         status.style.color = "white";
     }, 2000);
 }
+let start = 0;
+let end = 0;
+let condition = true; // true — меню закрыто, false — открыто
+
+// Функция открытия (выезд слева)
+function openburger(){
+    anime({
+        targets: '.menu', // Поменял на .menu
+        translateX: ['-100%', '0'],
+        duration: 1000,
+        easing: 'easeInOutQuad',
+        loop: false
+    });
+}
+
+// Функция закрытия (уезд влево)
+function closeburger(){
+    anime({
+        targets: '.menu', // Поменял на .menu
+        translateX: ['0', '-100%'],
+        duration: 1000,
+        easing: 'easeInOutQuad',
+        loop: false
+    });
+}
+
+// Обработка клика по иконке
+$('.menu_small_icon').click(function(){
+    if(condition){
+        openburger();
+        condition = false;
+    }
+    else{
+        closeburger();
+        condition = true;
+    }
+});
+
+// Логика свайпа на контейнере
+$('.container').on('touchstart', function (event) {
+    // Запоминаем точку начала касания
+    start = event.originalEvent.touches[0].pageX;
+});
+
+$('.container').on('touchend', function (event) {
+    // Запоминаем точку конца касания
+    end = event.originalEvent.changedTouches[0].pageX;
+
+    // Свайп ВПРАВО (открыть), если меню закрыто (condition == true)
+    if (end - start >= 100 && condition) {
+        openburger();
+        condition = false;
+    } 
+    // Свайп ВЛЕВО (закрыть), если меню открыто (condition == false)
+    else if (start - end >= 100 && !condition) {
+        closeburger();
+        condition = true;
+    }
+});

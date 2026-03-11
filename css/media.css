@@ -173,6 +173,14 @@
         line-height: 1.6;
         color: #ddd;
     }
+    .menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%); /* Изначально спрятано за экраном */
+    will-change: transform; /* Для плавности анимации */
+}
+
 }
 .sidebar {
     position: fixed;
