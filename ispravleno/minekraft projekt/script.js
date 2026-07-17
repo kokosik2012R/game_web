@@ -1,3 +1,32 @@
+
+function handle() {
+    alert('Форма отправлена!');
+    
+    let inputs = document.querySelectorAll("input");
+    let input_values = [];
+    
+    for (let i = 0; i < inputs.length; i++) {
+        input_values.push(inputs[i].value);
+    }
+}
+
+let button = document.querySelector('.send-btn');
+button.addEventListener('click', handle);
+
+let links = document.querySelectorAll('.scroll');
+let targetID;
+links.forEach(function (element) {
+  element.addEventListener('click', function (event) {
+    event.preventDefault(); 
+    targetID = element.getAttribute('href'); 
+    document.querySelector(targetID).scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start'
+    })
+  })
+})
+
+
 let fnHP = 100;
 let fnMats = 30;
 let gameActive = false;
@@ -8,6 +37,7 @@ function toggleGame(show) {
     gameActive = show;
     
     if (show) {
+        alert('Your goal: Survive in the zone by fighting off enemies and building structures in time Loot Supply Drops: Click on the falling blue crates. They restore 30 HP and grant 50 WoodBuild for Cover: Click anywhere on the empty arena to build a wall. One wall costs 10 Wood. Walls automatically block one enemy shot but disappear after 4 seconds. Eliminate Enemies: As soon as you see an enemy, click on them! If you dont kill them within 2 seconds, you take 20 damage. Emote: Press the EMOTE button to flex on your opponents! Victory: Keep your HP bar green. If it hits zero, its game over.');
         overlay.classList.add('active');
         resetGame();
         startLoops();
@@ -133,3 +163,105 @@ function playEmote() {
         status.style.color = "white";
     }, 2000);
 }
+let start = 0;
+let end = 0;
+function openburger(){
+    anime({
+    targets: '.menu',
+    translateX: ['-100%', '0'],
+    duration: 1000,
+    easing: 'easeInOutQuad',
+    loop: false
+})
+}
+function closeburger(){
+    anime({
+    targets: '.menu',
+    translateX: ['0', '-100%'],
+    duration: 1000,
+    easing: 'easeInOutQuad',
+    loop: false
+})
+}
+let condition = true
+$('.menu').click(function(){
+    if(condition){
+        openburger();
+        condition = false
+    }
+    else{
+        closeburger();
+        condition = true
+    }
+})
+
+$('.container').on('touchstart', function (event) {
+    start = event.originalEvent.touches[0].pageX;
+});
+
+$('.container').on('touchend', function (event) {
+    end = event.originalEvent.changedTouches[0].pageX;
+    if (end - start >= 100 && condition) {
+        openburger();
+        condition = false;
+    } 
+    else if (start - end >= 100 && !condition) {
+        closeburger();
+        condition = true
+    }
+});
+let startX = 0;
+
+document.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+
+    // свайп вправо
+    if (startX < 30 && endX - startX > 50) {
+        document.querySelector(".menu").classList.add("active");
+    }
+
+    // свайп влево
+    if (startX - endX > 50) {
+        document.querySelector(".menu").classList.remove("active");
+    }
+});
+
+window.addEventListener("load", () => {
+
+    const footer = document.querySelector("footer");
+
+    if (!footer) return;
+
+    const cube = document.createElement("div");
+    cube.className = "runner";
+
+    footer.appendChild(cube);
+
+    let x = -40;
+    let angle = 0;
+
+    function animate() {
+
+        x += 1.5;
+        angle += 3;
+
+        if (x > footer.offsetWidth + 40) {
+            x = -40;
+        }
+
+        cube.style.left = x + "px";
+
+        cube.style.transform =
+            `rotate(${angle}deg)
+             translateY(${Math.sin(angle * 0.05) * 4}px)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+});
